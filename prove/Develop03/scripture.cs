@@ -10,10 +10,20 @@ public class Scripture {
     public Scripture(string reference, string text) {
         _reference = reference;
         string[] verseTexts = text.Split('\n');
+        
+        int startVerse = 1;
+        if (reference.Contains(":")) {
+            string verseSection = reference.Split(':')[1];
+            if (verseSection.Contains("-")) {
+                startVerse = int.Parse(verseSection.Split('-')[0]);
+            } else {
+                startVerse = int.Parse(verseSection);
+            }
+        }
 
-        foreach (string verseText in verseTexts) {
-            if (!string.IsNullOrWhiteSpace(verseText)) {
-                _verses.Add(new Verse(verseText.Trim()));
+        for (int i = 0; i < verseTexts.Length; i++) {
+            if (!string.IsNullOrWhiteSpace(verseTexts[i])) {
+                _verses.Add(new Verse(verseTexts[i].Trim(), startVerse + i));
             }
         }
     }
@@ -21,7 +31,7 @@ public class Scripture {
     public void Display() {
         Console.WriteLine(_reference);
         for (int i = 0; i < _verses.Count; i++) {
-            Console.WriteLine($"{_verses[i].GetText()}");
+            Console.WriteLine($"Verse {_verses[i].GetVerseNumber()}: {_verses[i].GetText()}");
         }
     }
 
@@ -34,8 +44,9 @@ public class Scripture {
         return true;
     }
 
-    public bool HideVerse() {
-        int hidecount = 3;
+    public bool HideVerse(int wordCount = 3) {
+        // Default to 3 and then accept a word count to change the difficulty
+        int hidecount = wordCount;
         bool anyWordsHidden = false;
         while(hidecount > 0 && !IsFinished()) {
             int randVerse = rnd.Next(_verses.Count);

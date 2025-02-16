@@ -1,17 +1,22 @@
 public class Verse {
         private List<Word> _words = new List<Word>();
-
+        private int _verseNumber;
         private Random rnd = new Random();
 
     public Verse() {
-        //empty list already initialized
+        _verseNumber = 1;
     }
 
-    public Verse(string text) {
-            string[] verseArray = text.Split(' ');
-            foreach (string word in verseArray) {
-                _words.Add(new Word(word));
-            }
+    public Verse(string text, int verseNumber) {
+        _verseNumber = verseNumber;
+        string[] verseArray = text.Split(' ');
+        foreach (string word in verseArray) {
+            _words.Add(new Word(word));
+        }
+    }
+
+    public int GetVerseNumber() {
+        return _verseNumber;
     }
 
     public bool IsFinished() {
