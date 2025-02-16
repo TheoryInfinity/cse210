@@ -1,8 +1,8 @@
 
 
 public class Word {
-    private string _text = "";
-    private bool _hidden = "";
+    private string _text;
+    private bool _hidden;
 
     public Word() {
         _text = "";
@@ -14,12 +14,25 @@ public class Word {
         _hidden = false;
     }
 
-    public bool getHidden() {
-        return _hidden
+    public bool GetHidden() {
+        return _hidden;
     }
 
-    public bool setHidden() {
-        
+    public bool Hide() {
+        if (_hidden == true) {
+            return false;
+        }
+        else {
+            _hidden = true;
+            return true;
+        }
+    }
+
+    public string GetText() {
+        if (_hidden) {
+            return new string('_', _text.Length);
+        }
+        return _text;
     }
 
 }
