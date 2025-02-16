@@ -7,6 +7,7 @@ class Program
         List<Scripture> _scriptures = new List<Scripture>();
         
         //Add some intial scriptures
+        // You will need to select a verse before continueing to the main loop
         _scriptures.Add(new Scripture("John 3:16", 
             "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."));
         
@@ -33,7 +34,7 @@ class Program
 
         Scripture selectedScripture = _scriptures[selection - 1];
 
-        // ***** Extra Content: A difficulty Selector!
+        // ***** Extra Content: A difficulty Selector! *****
         // Get difficulty selection
         Console.WriteLine("\nSelect difficulty level:");
         Console.WriteLine("1. Easy (3 words at a time)");
