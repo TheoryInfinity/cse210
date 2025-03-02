@@ -35,7 +35,7 @@ public class BreathingActivity : Activity
                 if (character == Convert.ToChar("▒"))
                 {
                     inside = !inside;
-                    Console.WriteLine("\n  Hold ");
+                    Console.WriteLine("\n   Hold ");
                     Thread.Sleep(3000);
                 }
                 else

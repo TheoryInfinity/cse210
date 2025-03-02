@@ -26,10 +26,10 @@ public class ListingActivity : Activity {
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
         
+        int counter = 5;
+        
         while (startTime < endTime)
         {
-
-            int counter = 5;
 
             Console.WriteLine("");
             rando = rand.Next(_prompts.Count);
@@ -39,6 +39,7 @@ public class ListingActivity : Activity {
             
             while (counter >= 0) {
                 Console.WriteLine($"\n     {counter}   ");
+                Console.SetCursorPosition(0, Console.CursorTop - 2);
                 counter--;
                 Thread.Sleep(1000);
             }
