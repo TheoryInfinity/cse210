@@ -35,7 +35,7 @@ class Program
                     reflect.Start();
                     break;
                 case "4":
-                    running = false; // Exit the loop to end the program
+                    running = false;
                     Console.WriteLine("Hope this improved your day. Goodbye!");
                     break;
                 default:

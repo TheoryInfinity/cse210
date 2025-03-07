@@ -28,14 +28,15 @@ public class ListingActivity : Activity {
         
         int counter = 5;
         
-        while (startTime < endTime)
-        {
-
+        
             Console.WriteLine("");
             rando = rand.Next(_prompts.Count);
             Console.WriteLine(_prompts[rando]);
             Console.WriteLine("");
             Console.WriteLine("Take a moment to think about the prompt");
+
+        while (startTime < endTime)
+        {
             
             while (counter >= 0) {
                 Console.WriteLine($"\n     {counter}   ");
@@ -44,7 +45,6 @@ public class ListingActivity : Activity {
                 Thread.Sleep(1000);
             }
 
-            
             Console.WriteLine("Type your thoughts:");
             string userInput = Console.ReadLine();
             _items.Add(userInput);
