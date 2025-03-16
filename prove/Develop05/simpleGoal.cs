@@ -17,16 +17,16 @@ public class SimpleGoal : Goal
 
     public override void Display()
     {
-        Console.WriteLine($"{_name}: {_pointValue} Points ");
         if (_completed)
         {
-            Console.Write("[X]");
+            Console.Write("[X] ");
         }
         else
         {
-            Console.Write("[ ]");
+            Console.Write("[ ] ");
         }
         Console.WriteLine(_desc);
+        Console.WriteLine($"{_name}: {_pointValue} Points ");
     }
 
     public override string GetRep()

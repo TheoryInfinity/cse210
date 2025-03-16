@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
+using System.Linq;
 
 class Program
 {
@@ -50,6 +51,11 @@ class Program
                         case "1":
                             Console.Write("\nName your simple goal:");
                             string name = Console.ReadLine();
+                            while (!IsGoalNameUnique(_goals, name))
+                            {
+                                Console.Write("\nA goal with that name already exists. Please choose another name:");
+                                name = Console.ReadLine();
+                            }
                             Console.Write("\nType points rewarded for this goal:");
                             int goalPoints = Convert.ToInt32(Console.ReadLine());
                             Console.Write("\nDescibe this goal:");
@@ -60,6 +66,11 @@ class Program
                         case "2":
                             Console.Write("\nName your eternal goal:");
                             name = Console.ReadLine();
+                            while (!IsGoalNameUnique(_goals, name))
+                            {
+                                Console.Write("\nA goal with that name already exists. Please choose another name:");
+                                name = Console.ReadLine();
+                            }
                             Console.Write("\nType points rewarded for this goal:");
                             goalPoints = Convert.ToInt32(Console.ReadLine());
                             Console.Write("\nDescibe this goal:");
@@ -70,11 +81,16 @@ class Program
                         case "3":
                             Console.Write("\nName your checklist goal:");
                             name = Console.ReadLine();
+                            while (!IsGoalNameUnique(_goals, name))
+                            {
+                                Console.Write("\nA goal with that name already exists. Please choose another name:");
+                                name = Console.ReadLine();
+                            }
                             Console.Write("\nType points rewarded each completion:");
                             goalPoints = Convert.ToInt32(Console.ReadLine());
                             Console.Write("\nType number of times until finished:");
                             int times = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("\nType bonus points rewarded for final completion");
+                            Console.Write("\nType bonus points rewarded for final completion:");
                             int bonusPoints = Convert.ToInt32(Console.ReadLine());
                             Console.Write("\nDescibe this goal:");
                             desciption = Console.ReadLine();
@@ -165,5 +181,12 @@ class Program
             }
 
         }
+
     }
+
+    private static bool IsGoalNameUnique(List<Goal> goals, string name)
+    {
+        return !goals.Any(g => g.GetName().Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
+
 }

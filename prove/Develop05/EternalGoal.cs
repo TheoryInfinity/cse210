@@ -23,7 +23,7 @@ public class EternalGoal : Goal
 
     public override string GetRep()
     {
-        string representation = $"EternalGoal:|:{_name}:|:{_pointValue}:|:{_desc}:|:{_timesCompleted}";
+        string representation = $"EternalGoal:|:{_pointValue}:|:{_name}:|:{_desc}:|:{_timesCompleted}";
         return representation;
     }
 

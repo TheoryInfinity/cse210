@@ -23,6 +23,14 @@ public class ChecklistGoal : Goal
 
     public override void Display()
     {
+        if (_timesCompleted >= _timesUntilComplete)
+        {
+            Console.Write("[X] ");
+        }
+        else
+        {
+            Console.Write("[ ] ");
+        }
         Console.WriteLine($"{_name}: {_pointValue} Points");
         Console.WriteLine(_desc);
         Console.WriteLine($"{_timesCompleted}/{_timesUntilComplete}");
