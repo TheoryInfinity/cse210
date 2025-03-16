@@ -26,7 +26,7 @@ public class SimpleGoal : Goal {
 
     public override string GetRep()
     {
-        string representation = $"SimpleGoal:|:{_name}:|:{_pointValue}:|:{_desc}:|:{_completed}";
+        string representation = $"SimpleGoal:|:{_pointValue}:|:{_name}:|:{_desc}:|:{_completed}";
         return representation;
     }
 

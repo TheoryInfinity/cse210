@@ -26,7 +26,7 @@ public class ChecklistGoal : Goal {
 
     public override string GetRep()
     {
-        string representation = $"EternalGoal:|:{_name}:|:{_pointValue}:|:{_desc}:|:{_bonusPoints}:|:{_timesCompleted}:|:{_timesUntilComplete}";
+        string representation = $"ChecklistGoal:|:{_pointValue}:|:{_name}:|:{_desc}:|:{_bonusPoints}:|:{_timesUntilComplete}:|:{_timesCompleted}";
         return representation;
     }
 

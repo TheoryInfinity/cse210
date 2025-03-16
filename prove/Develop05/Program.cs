@@ -114,11 +114,14 @@ class Program
                         if (goalType == "Points") {
                             points = Convert.ToInt32(parts[1]);
                         } else if (goalType == "SimpleGoal") {
-                            
+                            SimpleGoal newSimple = new SimpleGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToBoolean(parts[4]));
+                            _goals.Add(newSimple);
                         } else if (goalType == "EternalGoal") {
-
-                        } else if (goalType == "Checklist Goal") {
-                            
+                            EternalGoal newEternal = new EternalGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToInt32(parts[4]));
+                            _goals.Add(newEternal);
+                        } else if (goalType == "ChecklistGoal") {
+                            ChecklistGoal newChecklist = new ChecklistGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToInt32(parts[4]), Convert.ToInt32(parts[5]), Convert.ToInt32(parts[6]));
+                            _goals.Add(newChecklist);
                         }
                     }
                     Console.Clear();
