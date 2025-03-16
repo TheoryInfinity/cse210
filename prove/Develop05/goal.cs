@@ -18,10 +18,9 @@ public abstract class Goal {
 
     public abstract void Display();
 
-    public abstract bool IsCompleted();
+    public abstract int IsCompleted();
 
     public virtual void SetCompleted(){
-
     }
 
     public abstract string GetRep();

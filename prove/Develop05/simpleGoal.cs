@@ -4,7 +4,7 @@ public class SimpleGoal : Goal {
 
     private bool _completed;
 
-    public SimpleGoal() : base {
+    public SimpleGoal() : base() {
         _completed = false;
     }
 
@@ -26,18 +26,20 @@ public class SimpleGoal : Goal {
 
     public override string GetRep()
     {
-        string representation = $"SimpleGoal:|:{_name}:|:{_pointValue}:|:{_desc}:|:";
+        string representation = $"SimpleGoal:|:{_name}:|:{_pointValue}:|:{_desc}:|:{_completed}";
         return representation;
     }
 
-    public override bool IsCompleted()
+    public override int IsCompleted()
     {
-        return _completed;
+        SetCompleted();
+;       return _pointValue;
     }
 
     public override void SetCompleted()
     {
         base.SetCompleted();
+        _completed = true;
     }
 
 }
