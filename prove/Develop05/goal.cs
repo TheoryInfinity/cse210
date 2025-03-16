@@ -20,9 +20,13 @@ public abstract class Goal {
 
     public abstract int IsCompleted();
 
-    public virtual void SetCompleted(){
+    public virtual void SetCompleted() {
+
     }
 
+    public string GetName() {
+        return _name;
+    }
     public abstract string GetRep();
     
 

@@ -85,7 +85,10 @@ class Program
 
                     break;
                 case "2":
-                    Console.Clear();
+                    foreach (Goal goal in _goals) {
+                        goal.Display();
+                        Console.WriteLine("");
+                    }
                     break;
                 case "3":
                     Console.Clear();
@@ -94,6 +97,17 @@ class Program
                     Console.Clear();
                     break;
                 case "5":
+                    string completedgoalname = Console.ReadLine();
+                    bool goalFound = false;
+                    foreach (Goal goal in _goals) {
+                        if (completedgoalname == goal.GetName()) {
+                            goal.IsCompleted();
+                            goalFound = true;
+                        }
+                    }
+                    if (goalFound == false) {
+                        Console.WriteLine("Goal Not found");
+                    }
                     Console.Clear();
                     break;
                 case "6":
