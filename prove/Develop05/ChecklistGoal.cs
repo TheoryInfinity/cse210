@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public class ChecklistGoal : Goal {
 
     private int _bonusPoints;
@@ -31,7 +33,12 @@ public class ChecklistGoal : Goal {
     public override int IsCompleted()
     {
         _timesCompleted++;
-        return _pointValue;
+        if (_timesCompleted == _timesUntilComplete) {
+            return _pointValue + _bonusPoints;
+        }
+        else {
+            return _pointValue;
+        }
     }
 
 }
