@@ -41,5 +41,7 @@ public class SimpleGoal : Goal {
         base.SetCompleted();
         _completed = true;
     }
-
+    public SimpleGoal(int points, string name, string description, bool completed) : base (points, name, description) {
+        _completed = completed;
+    }
 }

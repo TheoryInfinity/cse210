@@ -14,6 +14,8 @@ class Program
         bool done = false;
 
         int points = 0;
+        
+        string fileName = "Goals.txt";
 
         while(!done) {
 
@@ -92,10 +94,9 @@ class Program
                     }
                     break;
                 case "3":
-                    string fileName = "Goals.txt";
-
                     using (StreamWriter outputFile = new StreamWriter(fileName))
                             {
+                                string pointsString = $"Points:|:{points}";
                                 foreach (Goal goal in _goals) {
                                     string goalString = goal.GetRep();
                                     outputFile.WriteLine(goalString);
@@ -104,6 +105,22 @@ class Program
                     Console.Clear();
                     break;
                 case "4":
+                    string[] lines = System.IO.File.ReadAllLines(fileName);
+
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split(":|:");
+                        string goalType = parts[0];
+                        if (goalType == "Points") {
+                            points = Convert.ToInt32(parts[1]);
+                        } else if (goalType == "SimpleGoal") {
+                            
+                        } else if (goalType == "EternalGoal") {
+
+                        } else if (goalType == "Checklist Goal") {
+                            
+                        }
+                    }
                     Console.Clear();
                     break;
                 case "5":

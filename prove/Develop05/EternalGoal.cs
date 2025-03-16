@@ -29,4 +29,8 @@ public class EternalGoal : Goal {
         return _pointValue;
     }
 
+    public EternalGoal(int points, string name, string description, int timesCompleted) : base (points, name, description) {
+        _timesCompleted = timesCompleted;
+    }
+
 }

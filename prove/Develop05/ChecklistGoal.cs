@@ -41,4 +41,10 @@ public class ChecklistGoal : Goal {
         }
     }
 
+    public ChecklistGoal(int points, string name, string description, int bonus, int times, int timescompleted) : base (points, name, description) {
+        _bonusPoints = bonus;
+        _timesCompleted = timescompleted;
+        _timesUntilComplete = times;
+    }
+
 }
