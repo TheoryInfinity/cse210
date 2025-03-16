@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -91,6 +92,15 @@ class Program
                     }
                     break;
                 case "3":
+                    string fileName = "Goals.txt";
+
+                    using (StreamWriter outputFile = new StreamWriter(fileName))
+                            {
+                                foreach (Goal goal in _goals) {
+                                    string goalString = goal.GetRep();
+                                    outputFile.WriteLine(goalString);
+                                }
+                            }
                     Console.Clear();
                     break;
                 case "4":

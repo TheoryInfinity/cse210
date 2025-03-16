@@ -14,6 +14,7 @@ public class EternalGoal : Goal {
     public override void Display() {
         Console.WriteLine($"{_name}: {_pointValue} Points");
         Console.WriteLine(_desc);
+        Console.WriteLine($"{_timesCompleted}:");
     }
 
     public override string GetRep()
