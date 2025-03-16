@@ -99,7 +99,7 @@ class Program
                 case "3":
                     using (StreamWriter outputFile = new StreamWriter(fileName))
                     {
-                        string pointsString = $"Points:|:{points}";
+                        outputFile.WriteLine($"Points:|:{points}");
                         foreach (Goal goal in _goals)
                         {
                             string goalString = goal.GetRep();
@@ -138,6 +138,7 @@ class Program
                     Console.Clear();
                     break;
                 case "5":
+                    Console.WriteLine("\nWhich goal did you complete? (Enter the name):");
                     string completedgoalname = Console.ReadLine();
                     bool goalFound = false;
                     foreach (Goal goal in _goals)

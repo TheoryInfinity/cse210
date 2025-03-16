@@ -11,7 +11,7 @@ public class ChecklistGoal : Goal
     {
         _bonusPoints = 0;
         _timesCompleted = 0;
-        _timesUntilComplete = 1;
+        _timesUntilComplete = 0;
     }
 
     public ChecklistGoal(int points, string name, string description, int bonus, int times) : base(points, name, description)
