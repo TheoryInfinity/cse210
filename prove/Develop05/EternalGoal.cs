@@ -1,17 +1,21 @@
 
-public class EternalGoal : Goal {
+public class EternalGoal : Goal
+{
 
     private int _timesCompleted;
 
-    public EternalGoal() : base() {
+    public EternalGoal() : base()
+    {
         _timesCompleted = 0;
     }
 
-    public EternalGoal(int points, string name, string description) : base (points, name, description) {
+    public EternalGoal(int points, string name, string description) : base(points, name, description)
+    {
         _timesCompleted = 0;
     }
 
-    public override void Display() {
+    public override void Display()
+    {
         Console.WriteLine($"{_name}: {_pointValue} Points");
         Console.WriteLine(_desc);
         Console.WriteLine($"{_timesCompleted}:");
@@ -29,7 +33,8 @@ public class EternalGoal : Goal {
         return _pointValue;
     }
 
-    public EternalGoal(int points, string name, string description, int timesCompleted) : base (points, name, description) {
+    public EternalGoal(int points, string name, string description, int timesCompleted) : base(points, name, description)
+    {
         _timesCompleted = timesCompleted;
     }
 

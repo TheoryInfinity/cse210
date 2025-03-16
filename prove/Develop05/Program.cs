@@ -14,10 +14,11 @@ class Program
         bool done = false;
 
         int points = 0;
-        
+
         string fileName = "Goals.txt";
 
-        while(!done) {
+        while (!done)
+        {
 
             Console.WriteLine($"\nYou have {points} points.\n");
 
@@ -44,8 +45,9 @@ class Program
 
                     choice = Console.ReadLine();
 
-                    switch (choice) {
-                        case "1":               
+                    switch (choice)
+                    {
+                        case "1":
                             Console.Write("\nName your simple goal:");
                             string name = Console.ReadLine();
                             Console.Write("\nType points rewarded for this goal:");
@@ -55,7 +57,7 @@ class Program
                             SimpleGoal newSimple = new SimpleGoal(goalPoints, name, desciption);
                             _goals.Add(newSimple);
                             break;
-                        case "2":               
+                        case "2":
                             Console.Write("\nName your eternal goal:");
                             name = Console.ReadLine();
                             Console.Write("\nType points rewarded for this goal:");
@@ -65,7 +67,7 @@ class Program
                             EternalGoal newEternal = new EternalGoal(goalPoints, name, desciption);
                             _goals.Add(newEternal);
                             break;
-                        case "3":               
+                        case "3":
                             Console.Write("\nName your checklist goal:");
                             name = Console.ReadLine();
                             Console.Write("\nType points rewarded each completion:");
@@ -88,20 +90,22 @@ class Program
 
                     break;
                 case "2":
-                    foreach (Goal goal in _goals) {
+                    foreach (Goal goal in _goals)
+                    {
                         goal.Display();
                         Console.WriteLine("");
                     }
                     break;
                 case "3":
                     using (StreamWriter outputFile = new StreamWriter(fileName))
-                            {
-                                string pointsString = $"Points:|:{points}";
-                                foreach (Goal goal in _goals) {
-                                    string goalString = goal.GetRep();
-                                    outputFile.WriteLine(goalString);
-                                }
-                            }
+                    {
+                        string pointsString = $"Points:|:{points}";
+                        foreach (Goal goal in _goals)
+                        {
+                            string goalString = goal.GetRep();
+                            outputFile.WriteLine(goalString);
+                        }
+                    }
                     Console.Clear();
                     break;
                 case "4":
@@ -111,15 +115,22 @@ class Program
                     {
                         string[] parts = line.Split(":|:");
                         string goalType = parts[0];
-                        if (goalType == "Points") {
+                        if (goalType == "Points")
+                        {
                             points = Convert.ToInt32(parts[1]);
-                        } else if (goalType == "SimpleGoal") {
+                        }
+                        else if (goalType == "SimpleGoal")
+                        {
                             SimpleGoal newSimple = new SimpleGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToBoolean(parts[4]));
                             _goals.Add(newSimple);
-                        } else if (goalType == "EternalGoal") {
+                        }
+                        else if (goalType == "EternalGoal")
+                        {
                             EternalGoal newEternal = new EternalGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToInt32(parts[4]));
                             _goals.Add(newEternal);
-                        } else if (goalType == "ChecklistGoal") {
+                        }
+                        else if (goalType == "ChecklistGoal")
+                        {
                             ChecklistGoal newChecklist = new ChecklistGoal(Convert.ToInt32(parts[1]), parts[2], parts[3], Convert.ToInt32(parts[4]), Convert.ToInt32(parts[5]), Convert.ToInt32(parts[6]));
                             _goals.Add(newChecklist);
                         }
@@ -129,13 +140,16 @@ class Program
                 case "5":
                     string completedgoalname = Console.ReadLine();
                     bool goalFound = false;
-                    foreach (Goal goal in _goals) {
-                        if (completedgoalname == goal.GetName()) {
-                            goal.IsCompleted();
+                    foreach (Goal goal in _goals)
+                    {
+                        if (completedgoalname == goal.GetName())
+                        {
+                            points += goal.IsCompleted();
                             goalFound = true;
                         }
                     }
-                    if (goalFound == false) {
+                    if (goalFound == false)
+                    {
                         Console.WriteLine("Goal Not found");
                     }
                     Console.Clear();
