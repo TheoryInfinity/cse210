@@ -19,6 +19,27 @@ public class User {
     }
 
     public void Logout() {
+
+    }
+
+    public int CalculatePriceTotal() {
+        int PriceTotal = 0;
+        return PriceTotal;
+    }
+
+    public void AddContract() {
+
+    }
+
+    public void RemoveContratc() {
+
+    }
+
+    public void ListContracts() {
+
+    }
+
+    public void Display() {
         
     }
 }
