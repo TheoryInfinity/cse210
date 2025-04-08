@@ -2,6 +2,7 @@ using System.Diagnostics.Contracts;
 
 public class User {
 
+    private string _userID;
     private string _name;
     private string _password;
 
@@ -31,7 +32,7 @@ public class User {
 
     }
 
-    public void RemoveContratc() {
+    public void RemoveContract() {
 
     }
 
