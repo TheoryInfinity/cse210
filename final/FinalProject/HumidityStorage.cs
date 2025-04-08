@@ -13,7 +13,7 @@ public class HumidityControlledUnit : Storage
     }
     public override string ToDisplayString(string availabilityStatus = "[Pending]")
     {
-        return $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height} | {_unitType} | Target Humidity: {_targetHumidity}% ± {_humidityVarianceRange}% | System: {(_isSystemOn ? "On" : "Off")} | Availability {availabilityStatus}";
+        return $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height} | {_unitType} | Target Humidity: {_targetHumidity}% ± {_humidityVarianceRange}% | System: {(_isSystemOn ? "On" : "Off")} | {availabilityStatus}";
     }
     public override string RepSaveString()
     {

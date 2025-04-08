@@ -80,6 +80,11 @@ public class User
         }
     }
 
+    public bool HasActiveContracts()
+    {
+        return _contracts.Any(c => c.IsActive());
+    }
+
     public void ListInactiveContracts(Dictionary<int, int> unitBaseCosts)
     {
         foreach (Contract contract in _contracts)

@@ -212,6 +212,12 @@ class Program
             Console.WriteLine(unit.ToDisplayString());
         }
 
+        if (available.Count == 0)
+        {
+            Console.WriteLine("There are currently no available units to rent.");
+            return;
+        }
+
         int unitChoice;
         bool validChoice = false;
 
@@ -302,6 +308,12 @@ class Program
     static void CancelUserContract(User currentUser, Dictionary<int, int> unitBaseCosts)
     {
         currentUser.ListActiveContracts(unitBaseCosts);
+
+        if (!currentUser.HasActiveContracts())
+        {
+            Console.WriteLine("You have no active contracts to cancel.");
+            return;
+        }
 
         Console.WriteLine("Enter the Unit ID of the contract you'd like to cancel:");
         string cancelInput = Console.ReadLine();
