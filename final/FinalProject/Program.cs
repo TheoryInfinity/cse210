@@ -74,32 +74,19 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("\nAvailable Units:");
-                    bool anyAvailable = false;
+                    List<Storage> availableUnits = ListAvailableUnits(units, allContracts);
 
-                    foreach (Storage unit in units)
-                    {
-                        bool available = true;
-
-                        foreach (Contract contract in allContracts)
-                        {
-                            if (contract.IsActive() && contract.GetUnitID() == unit.GetUnitID())
-                            {
-                                available = false;
-                                break;
-                            }
-                        }
-
-                        if (available)
-                        {
-                            Console.WriteLine(unit.ToDisplayString());
-                            anyAvailable = true;
-                        }
-                    }
-
-                    if (!anyAvailable)
+                    if (availableUnits.Count == 0)
                     {
                         Console.WriteLine("No units currently available.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nAvailable Units:");
+                        foreach (Storage unit in availableUnits)
+                        {
+                            Console.WriteLine(unit.ToDisplayString());
+                        }
                     }
 
                     break;
@@ -202,23 +189,26 @@ class Program
                         }
                         break;
                     case "2":
-                        Console.WriteLine("You have no contracts");
+                        currentUser.ListActiveContracts(unitBaseCosts);
                         break;
                     case "3":
                         SignContract(currentUser, units, allContracts, unitBaseCosts);
                         break;
                     case "4":
-                        Console.WriteLine("You have no contracts");
+                        CancelUserContract(currentUser, unitBaseCosts);
                         break;
                     case "5":
-                        Console.WriteLine("Account information not available at this time");
+                        currentUser.Display(unitBaseCosts);
                         break;
                     case "6":
                         intro = true;
+                        currentUser = null;
                         loggedin = false;
                         break;
                     case "7":
+                        Console.WriteLine("Goodbye!");
                         loggedin = false;
+                        intro = false;
                         break;
                     default:
                         Console.WriteLine("Invalid Input");
@@ -226,9 +216,6 @@ class Program
                 }
             }
         }
-        // Will initialize with a list of all available storage boxes\
-        // Will have a login menu
-        // Will save and load users from a database.
     }
 
     static void SignContract(User currentUser, List<Storage> units, List<Contract> allContracts, Dictionary<int, int> unitBaseCosts)
@@ -325,6 +312,42 @@ class Program
         Contract newContract = new Contract(currentUser.GetID(), unitChoice, duration, discount);
         currentUser.AddContract(newContract);
         allContracts.Add(newContract);
+    }
+
+    static void CancelUserContract(User currentUser, Dictionary<int, int> unitBaseCosts)
+    {
+        currentUser.ListActiveContracts(unitBaseCosts);
+
+        Console.WriteLine("Enter the Unit ID of the contract you'd like to cancel:");
+        string cancelInput = Console.ReadLine();
+        int cancelID;
+
+        if (int.TryParse(cancelInput, out cancelID))
+        {
+            Console.WriteLine("Are you sure you want to cancel this contract? You will have 5 days to undo this decision. (Y/N)");
+            string confirmCancel = Console.ReadLine().Trim().ToLower();
+
+            if (confirmCancel == "y")
+            {
+                bool success = currentUser.CancelContract(cancelID);
+                if (success)
+                {
+                    Console.WriteLine($"Contract for Unit {cancelID} marked as canceled. You have 5 days to undo this action.");
+                }
+                else
+                {
+                    Console.WriteLine("No active contract found with that Unit ID.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Cancellation aborted.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a numeric Unit ID.");
+        }
     }
 
     static List<Storage> ListAvailableUnits(List<Storage> allUnits, List<Contract> allContracts)

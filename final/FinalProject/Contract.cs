@@ -147,5 +147,9 @@ public class Contract
         return true;
     }
 
+    public string RepSaveString()
+    {
+        return $"{_unitID}~{_startDate}~{_endDate}~{_costMultiplier}~{_costAdditiveScalar}~{_isActive}~{_isCanceled}~{_effectiveCancelDate}";
+    }
 
 }

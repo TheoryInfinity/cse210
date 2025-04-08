@@ -22,6 +22,6 @@ public class TemperatureControlledUnit : Storage
 
     public override string RepSaveString()
     {
-        throw new NotImplementedException();
+        return $"Temperature~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetTemperature}~{_tempVarianceRange}~{_isSystemOn}";
     }
 }

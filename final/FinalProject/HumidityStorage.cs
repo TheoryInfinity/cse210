@@ -19,6 +19,6 @@ public class HumidityControlledUnit : Storage
 
     public override string RepSaveString()
     {
-        throw new NotImplementedException();
+        return $"Humid~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetHumidity}~{_humidityVarianceRange}~{_isSystemOn}";
     }
 }

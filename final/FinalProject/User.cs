@@ -106,7 +106,7 @@ public class User
         return _userID;
     }
 
-    public void Display()
+    public void Display(Dictionary<int, int> unitBaseCosts)
     {
         int activeCount = 0;
         foreach (Contract contract in _contracts)
@@ -117,6 +117,22 @@ public class User
             }
         }
 
-        Console.WriteLine($"User ID: {_userID} | Name: {_name} | Active Contracts: {activeCount}");
+        double total = CalculatePriceTotal(unitBaseCosts);
+
+        Console.WriteLine($"User ID: {_userID} | Name: {_name} | Active Contracts: {activeCount} | Total Monthly Cost: ${total:F2}");
+    }
+
+    public string RepSaveString()
+    {
+        List<string> contractStrings = new List<string>();
+
+        foreach (Contract contract in _contracts)
+        {
+            contractStrings.Add(contract.RepSaveString());
+        }
+
+        string contractsPart = string.Join(" :|: ", contractStrings);
+
+        return $"{_userID} :||: {_name} :||: {_password} :||: {contractsPart}";
     }
 }

@@ -12,7 +12,6 @@ public class StandardStorageUnit : Storage
 
     public override string RepSaveString()
     {
-        // Placeholder
-        return $"Standard,{_unitID},{_size},{_width},{_length},{_height},{_costPerMonth}";
+        return $"Standard~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}";
     }
 }
