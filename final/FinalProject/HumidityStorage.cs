@@ -4,7 +4,8 @@ public class HumidityControlledUnit : Storage
     private int _humidityVarianceRange;
     private bool _isSystemOn;
 
-    public HumidityControlledUnit(string size, int unitID, int humidityPremium) : base (size, unitID, "Humidity-Controlled") {
+    public HumidityControlledUnit(string size, int unitID, int humidityPremium) : base(size, unitID, "Humidity-Controlled")
+    {
         _costPerMonth += humidityPremium;
         _targetHumidity = 50;           // %
         _humidityVarianceRange = 5;

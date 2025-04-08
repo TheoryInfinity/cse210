@@ -1,4 +1,5 @@
-public class TemperatureControlledUnit : Storage {
+public class TemperatureControlledUnit : Storage
+{
 
     private int _targetTemperature;
     private int _tempVarianceRange;
@@ -12,10 +13,11 @@ public class TemperatureControlledUnit : Storage {
         _tempVarianceRange = 2;
         _isSystemOn = true;
     }
-    
-    public override string ToDisplayString() {
-    string systemStatus = _isSystemOn ? "On" : "Off";
-    return base.ToDisplayString() + $" | Temp: {_targetTemperature}° | System: {systemStatus}";
+
+    public override string ToDisplayString()
+    {
+        string systemStatus = _isSystemOn ? "On" : "Off";
+        return base.ToDisplayString() + $" | Temp: {_targetTemperature}° | System: {systemStatus}";
     }
 
     public override string RepSaveString()

@@ -1,7 +1,8 @@
 using System.Formats.Asn1;
 using System.Xml.Linq;
 
-public abstract class Storage {
+public abstract class Storage
+{
 
     protected int _unitID;
     protected int _height;
@@ -9,10 +10,10 @@ public abstract class Storage {
     protected int _width;
     protected int _costPerMonth;
     protected string _size;
-
     protected string _unitType;
 
-    public Storage() {
+    public Storage()
+    {
         _unitID = -1;
         _height = 0;
         _width = 0;
@@ -22,7 +23,8 @@ public abstract class Storage {
         _unitType = "none";
     }
 
-    public Storage(int ident, int height, int length, int width, int cost, string unitType, string size = "custom") {
+    public Storage(int ident, int height, int length, int width, int cost, string unitType, string size = "custom")
+    {
         _unitID = ident;
         _height = height;
         _width = width;
@@ -33,17 +35,17 @@ public abstract class Storage {
     }
 
     public Storage(string size, int unitID, string unitType)
-{
-    _unitID = unitID;
-    _size = size;
-    _unitType = unitType;
-    
+    {
+        _unitID = unitID;
+        _size = size;
+        _unitType = unitType;
+
 
         if (!SetDimensionsBySize(size))
         {
             Console.WriteLine("Invalid size input.");
         }
-}
+    }
 
     private bool SetDimensionsBySize(string size)
     {
@@ -72,22 +74,31 @@ public abstract class Storage {
         }
     }
 
-    public double GetTotalArea() {
+    public double GetTotalArea()
+    {
         double Area = (double)_length * (double)_width;
         return Area;
     }
 
-    public double GetTotalVolume() {
+    public double GetTotalVolume()
+    {
         double Area = (double)_height * (double)_length * (double)_width;
         return Area;
     }
 
-    public virtual string ToDisplayString() {
+    public int GetBaseCost()
+    {
+        return _costPerMonth;
+    }
+
+    public virtual string ToDisplayString()
+    {
         string DisplayString = $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height}  | {_unitType} | Availability [Pending]";
         return DisplayString;
     }
-    
-    public int GetUnitID() {
+
+    public int GetUnitID()
+    {
         return _unitID;
     }
 

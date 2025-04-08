@@ -1,6 +1,7 @@
 public class StandardStorageUnit : Storage
 {
-    public StandardStorageUnit(string size, int unitID): base(size, unitID, "Standard") {
+    public StandardStorageUnit(string size, int unitID) : base(size, unitID, "Standard")
+    {
         // Same as base
     }
 

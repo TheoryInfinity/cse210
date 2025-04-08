@@ -1,6 +1,7 @@
 using System.Diagnostics.Contracts;
 
-public class User {
+public class User
+{
 
     private int _userID;
     private string _name;
@@ -8,12 +9,13 @@ public class User {
 
     private List<Contract> _contracts = new List<Contract>();
 
-    public User() {
+    public User()
+    {
         _userID = -1;
         _name = "John Doe";
         _password = "NA";
         _contracts = new List<Contract>();
-    }   
+    }
 
     public User(int id, string name, string password)
     {
@@ -28,7 +30,8 @@ public class User {
         return passwordAttempt == _password;
     }
 
-    public double CalculatePriceTotal(Dictionary<int, int> unitBaseCosts) {
+    public double CalculatePriceTotal(Dictionary<int, int> unitBaseCosts)
+    {
         double total = 0;
 
         foreach (Contract contract in _contracts)
@@ -86,6 +89,21 @@ public class User {
                 Console.WriteLine(contract.ToDisplayString(unitBaseCosts[contract.GetUnitID()]));
             }
         }
+    }
+
+    public string GetName()
+    {
+        return _name;
+    }
+
+    public string GetPassword()
+    {
+        return _name;
+    }
+
+    public int GetID()
+    {
+        return _userID;
     }
 
     public void Display()
