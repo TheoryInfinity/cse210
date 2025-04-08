@@ -17,8 +17,8 @@ public class TemperatureControlledUnit : Storage {
     string systemStatus = _isSystemOn ? "On" : "Off";
     return base.ToDisplayString() + $" | Temp: {_targetTemperature}° | System: {systemStatus}";
     }
-    
-    public override string RepString()
+
+    public override string RepSaveString()
     {
         throw new NotImplementedException();
     }

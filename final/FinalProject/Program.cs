@@ -5,6 +5,11 @@ class Program
     static void Main(string[] args)
     {
 
+        List<User> users = new List<User>();
+        List<Storage> units = new List<Storage>();
+        List<Contract> allContracts = new List<Contract>();
+        Dictionary<int, int> unitBaseCosts = new Dictionary<int, int>();
+
         bool intro = true;
         bool login = false;
 

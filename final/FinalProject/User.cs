@@ -2,45 +2,103 @@ using System.Diagnostics.Contracts;
 
 public class User {
 
-    private string _userID;
+    private int _userID;
     private string _name;
     private string _password;
 
-    private List<Contract> _activeContracts = new List<Contract>();
+    private List<Contract> _contracts = new List<Contract>();
 
     public User() {
+        _userID = -1;
         _name = "John Doe";
         _password = "NA";
+        _contracts = new List<Contract>();
     }   
 
-    public bool Login() {
-        //Code to actually log in
-        bool logSucess = false;
-        return logSucess;
+    public User(int id, string name, string password)
+    {
+        _userID = id;
+        _name = name;
+        _password = password;
+        _contracts = new List<Contract>();
     }
 
-    public void Logout() {
-
+    public bool Login(string passwordAttempt)
+    {
+        return passwordAttempt == _password;
     }
 
-    public int CalculatePriceTotal() {
-        int PriceTotal = 0;
-        return PriceTotal;
+    public double CalculatePriceTotal(Dictionary<int, int> unitBaseCosts) {
+        double total = 0;
+
+        foreach (Contract contract in _contracts)
+        {
+            if (contract.IsActive())
+            {
+                int unitID = contract.GetUnitID();
+
+                if (unitBaseCosts.ContainsKey(unitID))
+                {
+                    int baseCost = unitBaseCosts[unitID];
+                    total += contract.CalculateMonthlyCost(baseCost);
+                }
+            }
+        }
+
+        return total;
     }
 
-    public void AddContract() {
-
+    public void AddContract(Contract newContract)
+    {
+        _contracts.Add(newContract);
     }
 
-    public void RemoveContract() {
-
+    public bool CancelContract(int unitID)
+    {
+        foreach (Contract contract in _contracts)
+        {
+            if (contract.IsActive() && contract.GetUnitID() == unitID)
+            {
+                contract.CancelContract();
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void ListContracts() {
-
+    public void ListActiveContracts(Dictionary<int, int> unitBaseCosts)
+    {
+        foreach (Contract contract in _contracts)
+        {
+            if (contract.IsActive())
+            {
+                Console.WriteLine(contract.ToDisplayString(unitBaseCosts[contract.GetUnitID()]));
+            }
+        }
     }
 
-    public void Display() {
-        
+    public void ListInactiveContracts(Dictionary<int, int> unitBaseCosts)
+    {
+        foreach (Contract contract in _contracts)
+        {
+            if (!contract.IsActive())
+            {
+                Console.WriteLine(contract.ToDisplayString(unitBaseCosts[contract.GetUnitID()]));
+            }
+        }
+    }
+
+    public void Display()
+    {
+        int activeCount = 0;
+        foreach (Contract contract in _contracts)
+        {
+            if (contract.IsActive())
+            {
+                activeCount++;
+            }
+        }
+
+        Console.WriteLine($"User ID: {_userID} | Name: {_name} | Active Contracts: {activeCount}");
     }
 }

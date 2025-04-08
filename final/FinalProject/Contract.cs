@@ -89,34 +89,37 @@ public string ToDisplayString(int baseMonthlyCost) {
         }
     }
 
-    public void UndoCancellation()
-{
+    public void UndoCancellation(){
     if (_isCanceled)
-    {
-        DateTime today = DateTime.Today;
-        DateTime cancelDeadline = DateTime.ParseExact(_effectiveCancelDate, "yyyy-MM-dd", null);
+        {
+            DateTime today = DateTime.Today;
+            DateTime cancelDeadline = DateTime.ParseExact(_effectiveCancelDate, "yyyy-MM-dd", null);
 
-        if (today <= cancelDeadline)
-        {
-            _isCanceled = false;
-            _effectiveCancelDate = "none";
+            if (today <= cancelDeadline)
+            {
+                _isCanceled = false;
+                _effectiveCancelDate = "none";
+            }
+            else
+            {
+                Console.WriteLine("Cancellation can no longer be reversed.");
+            }
         }
-        else
-        {
-            Console.WriteLine("Cancellation can no longer be reversed.");
-        }
-    }
     }
 
     public int GetUnitID() {
         return _unitID;
     }
 
-public bool RentContract(int unitToClaim, List<Contract> existingContracts) {
-    foreach (Contract contract in existingContracts) {
-        if (contract._isActive && contract.GetUnitID() == unitToClaim) {
-            return false;
-        }
+    public bool IsActive() {
+        return _isActive;
+    }
+
+    public bool RentContract(int unitToClaim, List<Contract> existingContracts) {
+        foreach (Contract contract in existingContracts) {
+            if (contract._isActive && contract.GetUnitID() == unitToClaim) {
+                return false;
+            }
     }
 
     _unitID = unitToClaim;
