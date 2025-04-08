@@ -14,10 +14,9 @@ public class TemperatureControlledUnit : Storage
         _isSystemOn = true;
     }
 
-    public override string ToDisplayString()
+    public override string ToDisplayString(string availabilityStatus = "[Pending]")
     {
-        string systemStatus = _isSystemOn ? "On" : "Off";
-        return base.ToDisplayString() + $" | Temp: {_targetTemperature}° | System: {systemStatus}";
+        return $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height} | {_unitType} | Target Temp: {_targetTemperature}°F ± {_tempVarianceRange} | System: {(_isSystemOn ? "On" : "Off")} | {availabilityStatus}";
     }
 
     public override string RepSaveString()
@@ -25,7 +24,8 @@ public class TemperatureControlledUnit : Storage
         return $"Temperature~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetTemperature}~{_tempVarianceRange}~{_isSystemOn}";
     }
 
-    public TemperatureControlledUnit(int id, string size, int width, int length, int height, int cost, int targetTemp, int range, bool isOn) {
+    public TemperatureControlledUnit(int id, string size, int width, int length, int height, int cost, int targetTemp, int range, bool isOn)
+    {
         _unitType = "Temperature-Controlled";
         _unitID = id;
         _size = size;

@@ -18,46 +18,50 @@ class Program
 
         User currentUser = null;
 
-        int nextUnitID = 1;
 
-        // Standard Units
-        var standardSmall = new StandardStorageUnit("small", nextUnitID);
-        units.Add(standardSmall);
-        unitBaseCosts[nextUnitID++] = standardSmall.GetBaseCost();
+        if (units.Count == 0)
+        {
+            int nextUnitID = units.Count > 0 ? units.Max(u => u.GetUnitID()) + 1 : 1;
 
-        var standardMedium = new StandardStorageUnit("medium", nextUnitID);
-        units.Add(standardMedium);
-        unitBaseCosts[nextUnitID++] = standardMedium.GetBaseCost();
+            // Standard Units
+            var standardSmall = new StandardStorageUnit("small", nextUnitID);
+            units.Add(standardSmall);
+            unitBaseCosts[nextUnitID++] = standardSmall.GetBaseCost();
 
-        var standardLarge = new StandardStorageUnit("large", nextUnitID);
-        units.Add(standardLarge);
-        unitBaseCosts[nextUnitID++] = standardLarge.GetBaseCost();
+            var standardMedium = new StandardStorageUnit("medium", nextUnitID);
+            units.Add(standardMedium);
+            unitBaseCosts[nextUnitID++] = standardMedium.GetBaseCost();
 
-        // Humidity-Controlled Units
-        var humiditySmall = new HumidityControlledUnit("small", nextUnitID, 25);
-        units.Add(humiditySmall);
-        unitBaseCosts[nextUnitID++] = humiditySmall.GetBaseCost();
+            var standardLarge = new StandardStorageUnit("large", nextUnitID);
+            units.Add(standardLarge);
+            unitBaseCosts[nextUnitID++] = standardLarge.GetBaseCost();
 
-        var humidityMedium = new HumidityControlledUnit("medium", nextUnitID, 25);
-        units.Add(humidityMedium);
-        unitBaseCosts[nextUnitID++] = humidityMedium.GetBaseCost();
+            // Humidity-Controlled Units
+            var humiditySmall = new HumidityControlledUnit("small", nextUnitID, 25);
+            units.Add(humiditySmall);
+            unitBaseCosts[nextUnitID++] = humiditySmall.GetBaseCost();
 
-        var humidityLarge = new HumidityControlledUnit("large", nextUnitID, 25);
-        units.Add(humidityLarge);
-        unitBaseCosts[nextUnitID++] = humidityLarge.GetBaseCost();
+            var humidityMedium = new HumidityControlledUnit("medium", nextUnitID, 25);
+            units.Add(humidityMedium);
+            unitBaseCosts[nextUnitID++] = humidityMedium.GetBaseCost();
 
-        // Temperature-Controlled Units
-        var tempSmall = new TemperatureControlledUnit("small", nextUnitID, 40);
-        units.Add(tempSmall);
-        unitBaseCosts[nextUnitID++] = tempSmall.GetBaseCost();
+            var humidityLarge = new HumidityControlledUnit("large", nextUnitID, 25);
+            units.Add(humidityLarge);
+            unitBaseCosts[nextUnitID++] = humidityLarge.GetBaseCost();
 
-        var tempMedium = new TemperatureControlledUnit("medium", nextUnitID, 40);
-        units.Add(tempMedium);
-        unitBaseCosts[nextUnitID++] = tempMedium.GetBaseCost();
+            // Temperature-Controlled Units
+            var tempSmall = new TemperatureControlledUnit("small", nextUnitID, 40);
+            units.Add(tempSmall);
+            unitBaseCosts[nextUnitID++] = tempSmall.GetBaseCost();
 
-        var tempLarge = new TemperatureControlledUnit("large", nextUnitID, 40);
-        units.Add(tempLarge);
-        unitBaseCosts[nextUnitID++] = tempLarge.GetBaseCost();
+            var tempMedium = new TemperatureControlledUnit("medium", nextUnitID, 40);
+            units.Add(tempMedium);
+            unitBaseCosts[nextUnitID++] = tempMedium.GetBaseCost();
+
+            var tempLarge = new TemperatureControlledUnit("large", nextUnitID, 40);
+            units.Add(tempLarge);
+            unitBaseCosts[nextUnitID++] = tempLarge.GetBaseCost();
+        }
 
         bool intro = true;
         bool loggedin = false;
@@ -78,21 +82,7 @@ class Program
             switch (choice)
             {
                 case "1":
-                    List<Storage> availableUnits = ListAvailableUnits(units, allContracts);
-
-                    if (availableUnits.Count == 0)
-                    {
-                        Console.WriteLine("No units currently available.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nAvailable Units:");
-                        foreach (Storage unit in availableUnits)
-                        {
-                            Console.WriteLine(unit.ToDisplayString());
-                        }
-                    }
-
+                    DisplayAllUnitsWithStatus(units, allContracts);
                     break;
                 case "2":
                     Console.WriteLine("Please Enter your Username:");
@@ -163,7 +153,7 @@ class Program
             {
 
                 Console.WriteLine("Menu Options:");
-                Console.WriteLine("   1. List Available Units");
+                Console.WriteLine("   1. View All Units with Availability");
                 Console.WriteLine("   2. Show Current Contracts");
                 Console.WriteLine("   3. Sign a Contract");
                 Console.WriteLine("   4. Cancel a Contract");
@@ -177,20 +167,7 @@ class Program
                 switch (choice)
                 {
                     case "1":
-                        List<Storage> availableUnits = ListAvailableUnits(units, allContracts);
-
-                        if (availableUnits.Count == 0)
-                        {
-                            Console.WriteLine("No units currently available.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nAvailable Units:");
-                            foreach (Storage unit in availableUnits)
-                            {
-                                Console.WriteLine(unit.ToDisplayString());
-                            }
-                        }
+                        DisplayAllUnitsWithStatus(units, allContracts);
                         break;
                     case "2":
                         currentUser.ListActiveContracts(unitBaseCosts);
@@ -268,9 +245,9 @@ class Program
 
 
         Console.WriteLine("How long would you like to rent this unit?");
-        Console.WriteLine("1: 3  Months.");
-        Console.WriteLine("2: 6  Months. 5% discount.");
-        Console.WriteLine("3: 12 Months. 10% discount.");
+        Console.WriteLine("   1: 3  Months.");
+        Console.WriteLine("   2: 6  Months. 5% discount.");
+        Console.WriteLine("   3: 12 Months. 10% discount.");
 
         bool choiceSuccess = false;
         int duration = 0;
@@ -305,9 +282,9 @@ class Program
         int baseCost = unitBaseCosts[unitChoice];
         double finalMonthlyCost = baseCost * discount;
 
-        Console.WriteLine("These are the terms of your rental contract");
+        Console.WriteLine("   These are the terms of your rental contract");
         Console.WriteLine($"Unit {unitChoice} | Duration: {duration} Months | Monthly Cost {finalMonthlyCost} | Total {finalMonthlyCost * duration}");
-        Console.WriteLine("Do you wish to confirm this transaction?");
+        Console.WriteLine("   Do you wish to confirm this transaction? (Y/N)");
 
         string confirm = Console.ReadLine().Trim().ToLower();
 
@@ -384,6 +361,18 @@ class Program
         return availableStorage;
     }
 
+    static void DisplayAllUnitsWithStatus(List<Storage> units, List<Contract> contracts)
+    {
+        List<Storage> availableUnits = ListAvailableUnits(units, contracts);
+
+        foreach (Storage unit in units)
+        {
+            bool isAvailable = availableUnits.Any(u => u.GetUnitID() == unit.GetUnitID());
+            string status = isAvailable ? "Available" : "Unavailable";
+            Console.WriteLine(unit.ToDisplayString(status));
+        }
+    }
+
     static void SaveUnits(List<Storage> allunits)
     {
         string fileName = "StorageUnits.txt";
@@ -434,14 +423,14 @@ class Program
                     int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),
                     int.Parse(parts[5]), int.Parse(parts[6])));
             }
-            else if (StorageType == "Temperature-Controlled")
+            else if (StorageType == "Temperature")
             {
                 loaded.Add(new TemperatureControlledUnit(
                     int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),
                     int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7]),
                     int.Parse(parts[8]), bool.Parse(parts[9])));
             }
-            else if (StorageType == "Humidity-Controlled")
+            else if (StorageType == "Humid")
             {
                 loaded.Add(new HumidityControlledUnit(
                     int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),

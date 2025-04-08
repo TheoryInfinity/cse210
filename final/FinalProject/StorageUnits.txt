@@ -1,0 +1,9 @@
+Standard~1~small~5~5~8~50
+Standard~2~medium~10~10~8~100
+Standard~3~large~10~20~8~150
+Humid~4~small~5~5~8~75~50~5~True
+Humid~5~medium~10~10~8~125~50~5~True
+Humid~6~large~10~20~8~175~50~5~True
+Temperature~7~small~5~5~8~90~70~2~True
+Temperature~8~medium~10~10~8~140~70~2~True
+Temperature~9~large~10~20~8~190~70~2~True

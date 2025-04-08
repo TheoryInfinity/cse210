@@ -91,10 +91,9 @@ public abstract class Storage
         return _costPerMonth;
     }
 
-    public virtual string ToDisplayString()
+    public virtual string ToDisplayString(string availabilityStatus = "[Pending]")
     {
-        string DisplayString = $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height}  | {_unitType} | Availability [Pending]";
-        return DisplayString;
+        return $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height}  | {_unitType} | {availabilityStatus}";
     }
 
     public int GetUnitID()

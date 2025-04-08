@@ -11,18 +11,17 @@ public class HumidityControlledUnit : Storage
         _humidityVarianceRange = 5;
         _isSystemOn = true;
     }
-    public override string ToDisplayString()
+    public override string ToDisplayString(string availabilityStatus = "[Pending]")
     {
-        string systemStatus = _isSystemOn ? "On" : "Off";
-        return base.ToDisplayString() + $" | Humidity: {_targetHumidity}% | System: {systemStatus}";
+        return $"Unit {_unitID} | {_size} | Volume {(int)GetTotalVolume()} ft³ | Area {(int)GetTotalArea()} ft² | Dimensions: {_length}x{_width}x{_height} | {_unitType} | Target Humidity: {_targetHumidity}% ± {_humidityVarianceRange}% | System: {(_isSystemOn ? "On" : "Off")} | Availability {availabilityStatus}";
     }
-
     public override string RepSaveString()
     {
         return $"Humid~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetHumidity}~{_humidityVarianceRange}~{_isSystemOn}";
     }
 
-    public HumidityControlledUnit(int id, string size, int width, int length, int height, int cost, int targetHumidity, int range, bool isOn) {
+    public HumidityControlledUnit(int id, string size, int width, int length, int height, int cost, int targetHumidity, int range, bool isOn)
+    {
         _unitType = "Humidity-Controlled";
         _unitID = id;
         _size = size;

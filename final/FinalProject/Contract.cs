@@ -152,7 +152,7 @@ public class Contract
         return $"{_unitID}~{_startDate}~{_endDate}~{_costMultiplier}~{_costAdditiveScalar}~{_isActive}~{_isCanceled}~{_effectiveCancelDate}";
     }
 
-    public Contract(int unitID, string startDate, string endDate, int costMultiplier, int costAdditiveScalar, bool isActive, bool isCanceled, string cancelDate)
+    public Contract(int unitID, string startDate, string endDate, double costMultiplier, int costAdditiveScalar, bool isActive, bool isCanceled, string cancelDate)
     {
         _unitID = unitID;
         _startDate = startDate;

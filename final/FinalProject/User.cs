@@ -159,7 +159,7 @@ public class User
                 int unitID = int.Parse(values[0]);
                 string start = values[1];
                 string end = values[2];
-                int multiplier = int.Parse(values[3]);
+                double multiplier = double.Parse(values[3]);
                 int scalar = int.Parse(values[4]);
                 bool active = bool.Parse(values[5]);
                 bool canceled = bool.Parse(values[6]);
