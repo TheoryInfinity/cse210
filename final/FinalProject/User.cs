@@ -98,7 +98,7 @@ public class User
 
     public string GetPassword()
     {
-        return _name;
+        return _password;
     }
 
     public int GetID()
