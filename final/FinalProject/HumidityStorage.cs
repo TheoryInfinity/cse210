@@ -21,4 +21,17 @@ public class HumidityControlledUnit : Storage
     {
         return $"Humid~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetHumidity}~{_humidityVarianceRange}~{_isSystemOn}";
     }
+
+    public HumidityControlledUnit(int id, string size, int width, int length, int height, int cost, int targetHumidity, int range, bool isOn) {
+        _unitType = "Humidity-Controlled";
+        _unitID = id;
+        _size = size;
+        _width = width;
+        _length = length;
+        _height = height;
+        _costPerMonth = cost;
+        _targetHumidity = targetHumidity;
+        _humidityVarianceRange = range;
+        _isSystemOn = isOn;
+    }
 }

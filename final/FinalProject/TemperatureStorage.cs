@@ -24,4 +24,18 @@ public class TemperatureControlledUnit : Storage
     {
         return $"Temperature~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}~{_targetTemperature}~{_tempVarianceRange}~{_isSystemOn}";
     }
+
+    public TemperatureControlledUnit(int id, string size, int width, int length, int height, int cost, int targetTemp, int range, bool isOn) {
+        _unitType = "Temperature-Controlled";
+        _unitID = id;
+        _size = size;
+        _width = width;
+        _length = length;
+        _height = height;
+        _costPerMonth = cost;
+        _targetTemperature = targetTemp;
+        _tempVarianceRange = range;
+        _isSystemOn = isOn;
+    }
+
 }

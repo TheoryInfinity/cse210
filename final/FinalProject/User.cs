@@ -105,6 +105,10 @@ public class User
     {
         return _userID;
     }
+    public List<Contract> GetContracts()
+    {
+        return new List<Contract>(_contracts);
+    }
 
     public void Display(Dictionary<int, int> unitBaseCosts)
     {
@@ -134,5 +138,36 @@ public class User
         string contractsPart = string.Join(" :|: ", contractStrings);
 
         return $"{_userID} :||: {_name} :||: {_password} :||: {contractsPart}";
+    }
+
+    public User(string saveLine)
+    {
+        string[] parts = saveLine.Split(" :||: ");
+
+        _userID = int.Parse(parts[0]);
+        _name = parts[1];
+        _password = parts[2];
+
+        _contracts = new List<Contract>();
+
+        if (parts.Length > 3 && !string.IsNullOrWhiteSpace(parts[3]))
+        {
+            string[] contractStrings = parts[3].Split(" :|: ");
+            foreach (string c in contractStrings)
+            {
+                string[] values = c.Split('~');
+                int unitID = int.Parse(values[0]);
+                string start = values[1];
+                string end = values[2];
+                int multiplier = int.Parse(values[3]);
+                int scalar = int.Parse(values[4]);
+                bool active = bool.Parse(values[5]);
+                bool canceled = bool.Parse(values[6]);
+                string cancelDate = values[7];
+
+                Contract contract = new Contract(unitID, start, end, multiplier, scalar, active, canceled, cancelDate);
+                _contracts.Add(contract);
+            }
+        }
     }
 }

@@ -8,10 +8,13 @@ class Program
     static void Main(string[] args)
     {
 
-        List<User> users = new List<User>();
-        List<Storage> units = new List<Storage>();
-        List<Contract> allContracts = new List<Contract>();
-        Dictionary<int, int> unitBaseCosts = new Dictionary<int, int>();
+        List<User> users;
+        List<Storage> units;
+        List<Contract> allContracts;
+        Dictionary<int, int> unitBaseCosts;
+
+        LoadAll("Users.txt", "StorageUnits.txt", out users, out units, out unitBaseCosts, out allContracts);
+
 
         User currentUser = null;
 
@@ -384,7 +387,7 @@ class Program
     static void SaveUnits(List<Storage> allunits)
     {
         string fileName = "StorageUnits.txt";
-                    using (StreamWriter outputFile = new StreamWriter(fileName))
+        using (StreamWriter outputFile = new StreamWriter(fileName))
         {
             foreach (Storage unit in allunits)
             {
@@ -397,7 +400,7 @@ class Program
     static void SaveUsers(List<User> allusers)
     {
         string fileName = "Users.txt";
-                    using (StreamWriter outputFile = new StreamWriter(fileName))
+        using (StreamWriter outputFile = new StreamWriter(fileName))
         {
             foreach (User user in allusers)
             {
@@ -407,8 +410,77 @@ class Program
         }
     }
 
-    static void SaveAll(List<Storage> allunits, List<User> allusers) {
+    static void SaveAll(List<Storage> allunits, List<User> allusers)
+    {
         SaveUnits(allunits);
         SaveUsers(allusers);
+    }
+
+    static List<Storage> LoadUnits(string filepath)
+    {
+        List<Storage> loaded = new List<Storage>();
+        if (!File.Exists(filepath)) return loaded;
+
+        string[] lines = File.ReadAllLines(filepath);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("~");
+            string StorageType = parts[0];
+
+            if (StorageType == "Standard")
+            {
+                loaded.Add(new StandardStorageUnit(
+                    int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),
+                    int.Parse(parts[5]), int.Parse(parts[6])));
+            }
+            else if (StorageType == "Temperature-Controlled")
+            {
+                loaded.Add(new TemperatureControlledUnit(
+                    int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),
+                    int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7]),
+                    int.Parse(parts[8]), bool.Parse(parts[9])));
+            }
+            else if (StorageType == "Humidity-Controlled")
+            {
+                loaded.Add(new HumidityControlledUnit(
+                    int.Parse(parts[1]), parts[2], int.Parse(parts[3]), int.Parse(parts[4]),
+                    int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7]),
+                    int.Parse(parts[8]), bool.Parse(parts[9])));
+            }
+        }
+
+        return loaded;
+    }
+
+    static List<User> LoadUsers(string filepath)
+    {
+        List<User> loadedUsers = new List<User>();
+        if (!File.Exists(filepath)) return loadedUsers;
+
+        string[] lines = File.ReadAllLines(filepath);
+        foreach (string line in lines)
+        {
+            loadedUsers.Add(new User(line));
+        }
+        return loadedUsers;
+    }
+
+    static void LoadAll(string userPath, string unitPath, out List<User> users, out List<Storage> units, out Dictionary<int, int> unitBaseCosts, out List<Contract> allContracts)
+    {
+        users = LoadUsers(userPath);
+        units = LoadUnits(unitPath);
+        unitBaseCosts = new Dictionary<int, int>();
+
+        foreach (Storage unit in units)
+        {
+            unitBaseCosts[unit.GetUnitID()] = unit.GetBaseCost();
+        }
+
+        allContracts = new List<Contract>();
+        foreach (User user in users)
+        {
+            allContracts.AddRange(user.GetContracts());
+        }
     }
 }

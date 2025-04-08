@@ -14,4 +14,15 @@ public class StandardStorageUnit : Storage
     {
         return $"Standard~{_unitID}~{_size}~{_width}~{_length}~{_height}~{_costPerMonth}";
     }
+
+    public StandardStorageUnit(int id, string size, int width, int length, int height, int cost) {
+        _unitType = "Standard";
+        _unitID = id;
+        _size = size;
+        _width = width;
+        _length = length;
+        _height = height;
+        _costPerMonth = cost;
+    }
+
 }
