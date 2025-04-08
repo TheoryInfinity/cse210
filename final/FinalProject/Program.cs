@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics.Contracts;
+using System.IO.Enumeration;
 
 class Program
 {
@@ -193,19 +194,23 @@ class Program
                         break;
                     case "3":
                         SignContract(currentUser, units, allContracts, unitBaseCosts);
+                        SaveAll(units, users);
                         break;
                     case "4":
                         CancelUserContract(currentUser, unitBaseCosts);
+                        SaveAll(units, users);
                         break;
                     case "5":
                         currentUser.Display(unitBaseCosts);
                         break;
                     case "6":
+                        SaveAll(units, users);
                         intro = true;
                         currentUser = null;
                         loggedin = false;
                         break;
                     case "7":
+                        SaveAll(units, users);
                         Console.WriteLine("Goodbye!");
                         loggedin = false;
                         intro = false;
@@ -374,5 +379,36 @@ class Program
         }
 
         return availableStorage;
+    }
+
+    static void SaveUnits(List<Storage> allunits)
+    {
+        string fileName = "StorageUnits.txt";
+                    using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            foreach (Storage unit in allunits)
+            {
+                string unitString = unit.RepSaveString();
+                outputFile.WriteLine(unitString);
+            }
+        }
+    }
+
+    static void SaveUsers(List<User> allusers)
+    {
+        string fileName = "Users.txt";
+                    using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            foreach (User user in allusers)
+            {
+                string userString = user.RepSaveString();
+                outputFile.WriteLine(userString);
+            }
+        }
+    }
+
+    static void SaveAll(List<Storage> allunits, List<User> allusers) {
+        SaveUnits(allunits);
+        SaveUsers(allusers);
     }
 }
